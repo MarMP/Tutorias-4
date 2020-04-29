@@ -129,9 +129,57 @@
                      </children>
                   </VBox>
                </content></TitledPane>
-            <TitledPane animated="false" prefHeight="300.0" prefWidth="250.0" text="untitled" />
+            <TitledPane collapsible="false" prefHeight="300.0" prefWidth="250.0" text="Tutorías">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/tutorias.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <content>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnListarTutorias" mnemonicParsing="false" onAction="#listarTutorias" prefHeight="50.0" prefWidth="130.0" text="Listar">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/iconoListar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnAnadirTutoria" mnemonicParsing="false" onAction="#anadirTutoria" prefHeight="50.0" prefWidth="130.0" text="Añadir">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/iconoAnadir.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnBuscarTutoria" mnemonicParsing="false" onAction="#buscarTutoria" prefHeight="50.0" prefWidth="130.0" text="Buscar">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/iconoBuscar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnBorrarTutoria" mnemonicParsing="false" onAction="#borrarTutoria" prefHeight="50.0" prefWidth="130.0" text="Borrar">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/iconoBorrar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content></TitledPane>
          </children>
       </HBox>
    </children>
 </VBox>
-

@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="663.0" spacing="20.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.controladoresvistas.ControladorListarTutorias">
+   <children>
+      <Label style="-fx-font-size: 25;" text="Tutorías" />
+      <TableView fx:id="tvTutorias" prefHeight="359.0" prefWidth="611.0">
+        <columns>
+          <TableColumn fx:id="tcProfesor" prefWidth="303.0" text="Profesor/a" />
+          <TableColumn fx:id="tcTutoria" prefWidth="319.0" text="Tutoría" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAceptar" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

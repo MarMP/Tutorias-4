@@ -2,9 +2,12 @@ package org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.controladores
 
 import java.io.IOException;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.iesalandalus.programacion.tutorias.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
 import org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.utilidades.Dialogos;
 
 import javafx.fxml.FXML;
@@ -31,6 +34,10 @@ public class ControladorVentanaPrincipal {
 	@FXML Button btnBuscarAlumno;
 	@FXML Button btnBorrarAlumno;
 	@FXML Button btnListarAlumnos;
+	@FXML Button btnListarTutorias;
+	@FXML Button btnAnadirTutoria;
+	@FXML Button btnBuscarTutoria;
+	@FXML Button btnBorrarTutoria;
 	
 	private Stage anadirProfesor;
     private ControladorAnadirProfesor cAnadirProfesor;
@@ -44,6 +51,16 @@ public class ControladorVentanaPrincipal {
     private ControladorMostrarAlumno cMostrarAlumno;
     private Stage listarAlumnos;
     private ControladorListarAlumnos cListarAlumnos;
+    private Stage anadirTutorias;
+    private ControladorAnadirTutorias cAnadirTutorias;
+    private Stage buscarTutoria;
+    private ControladorBuscarTutorias cBuscarTutorias;
+    private Stage mostrarTutoria;
+    private ControladorMostrarTutoria cMostrarTutoria;
+    private Stage listarTutorias;
+    private ControladorListarTutorias cListarTutorias;
+    
+    
     
 	@FXML
 	void salir() {
@@ -169,6 +186,43 @@ public class ControladorVentanaPrincipal {
 		crearListarAlumnos();
 		listarAlumnos.showAndWait();
 	}
+	
+	//TUTORÍAS
+	
+	@FXML
+	private void anadirTutoria() throws IOException {
+		crearAnadirTutorias();
+		anadirTutorias.showAndWait();
+	}
+	
+	@FXML
+	private void buscarTutoria() throws IOException {
+		crearBuscarTutoria();
+		buscarTutoria.showAndWait();
+		Tutoria tutoria = cBuscarTutorias.getTutoria();
+		if (tutoria != null) {
+			crearMostrarTutoria(tutoria);
+			mostrarTutoria.showAndWait();
+		} else {
+			Dialogos.mostrarDialogoError("Tutoria no encontrada", "No existe ninguna tutoria");
+		}
+	}
+	
+	@FXML
+	private void listarTutorias() throws IOException {
+		crearListarTutorias();
+		listarTutorias.showAndWait();
+	}
+	
+	@FXML
+	private void borrarTutoria() {
+		try {
+			buscarTutoria();
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoError("Error", e.getMessage());
+		}
+
+	}
 
 	private void crearAnadirProfesor() throws IOException {
 		if (anadirProfesor == null) {
@@ -201,6 +255,24 @@ public class ControladorVentanaPrincipal {
 			anadirAlumno.setScene(escenaAnadirAlumno);
 		} else {
 			cAnadirAlumno.inicializa();
+		}
+	}
+	
+	private void crearAnadirTutorias() throws IOException {
+		if (anadirTutorias == null) {
+			anadirTutorias = new Stage();
+			FXMLLoader cargadorAnadirTutorias = new FXMLLoader(
+						getClass().getResource("../vistas/AnadirTutorias.fxml"));
+			VBox raizAnadirTutorias = cargadorAnadirTutorias.load();
+			cAnadirTutorias = cargadorAnadirTutorias.getController();
+			cAnadirTutorias.setControladorMVC(controladorMVC);
+			cAnadirTutorias.inicializa();
+			Scene escenaAnadirAula = new Scene(raizAnadirTutorias);
+			anadirTutorias.setTitle("Añadir Tutoría");
+			anadirTutorias.initModality(Modality.APPLICATION_MODAL); 
+			anadirTutorias.setScene(escenaAnadirAula);
+		} else {
+			cAnadirTutorias.inicializa();
 		}
 	}
 
@@ -238,6 +310,24 @@ public class ControladorVentanaPrincipal {
 			cMostrarAlumno.setAlumno(alumno);
 		}
 	}
+	
+	private void crearMostrarTutoria(Tutoria tutoria) throws IOException {
+		if (mostrarTutoria == null) {
+			mostrarTutoria = new Stage();
+			FXMLLoader cargadorMostrarTutoria = new FXMLLoader(
+						getClass().getResource("../vistas/MostrarTutorias.fxml"));
+			VBox raizMostrarTutoria = cargadorMostrarTutoria.load();
+			cMostrarTutoria = cargadorMostrarTutoria.getController();
+			cMostrarTutoria.setControladorMVC(controladorMVC);
+			cMostrarTutoria.setTutoria(tutoria);
+			Scene escenaMostrarTutoria = new Scene(raizMostrarTutoria);
+			mostrarTutoria.setTitle("Mostrar Reserva");
+			mostrarTutoria.initModality(Modality.APPLICATION_MODAL); 
+			mostrarTutoria.setScene(escenaMostrarTutoria);
+		} else {
+			cMostrarTutoria.setTutoria(tutoria);
+		}
+	}
 
 	private void crearListarProfesores() throws IOException {
 		if (listarProfesores == null) {
@@ -273,5 +363,43 @@ public class ControladorVentanaPrincipal {
 			cListarAlumnos.inicializa();
 		}
 	}
+	
+	private void crearListarTutorias() throws IOException {
+		if (listarTutorias == null) {
+			listarTutorias = new Stage();
+			FXMLLoader cargadorListarTutorias = new FXMLLoader(
+						getClass().getResource("../vistas/ListarTutorias.fxml"));
+			VBox raizListarTutorias = cargadorListarTutorias.load();
+			cListarTutorias = cargadorListarTutorias.getController();
+			cListarTutorias.setControladorMVC(controladorMVC);
+			cListarTutorias.inicializa();
+			Scene escenaListarTutorias = new Scene(raizListarTutorias);
+			listarTutorias.setTitle("Listar Tutorías");
+			listarTutorias.initModality(Modality.APPLICATION_MODAL); 
+			System.out.println("salgo del metodo");
+			listarTutorias.setScene(escenaListarTutorias);
+		} else {
+			cListarTutorias.inicializa();
+		}
+	}
+	
+	private void crearBuscarTutoria() throws IOException {
+		if (buscarTutoria == null) {
+			buscarTutoria = new Stage();
+			FXMLLoader cargadorBuscarTutoria = new FXMLLoader(
+						getClass().getResource("../vistas/BuscarTutorias.fxml"));
+			VBox raizBuscarTutoria = cargadorBuscarTutoria.load();
+			cBuscarTutorias = cargadorBuscarTutoria.getController();
+			cBuscarTutorias.setControladorMVC(controladorMVC);
+			cBuscarTutorias.inicializa();
+			Scene escenaBuscarProfesor = new Scene(raizBuscarTutoria);
+			buscarTutoria.setTitle("Buscar Tutoria");
+			buscarTutoria.initModality(Modality.APPLICATION_MODAL); 
+			buscarTutoria.setScene(escenaBuscarProfesor);
+		} else {
+			cBuscarTutorias.inicializa();
+		}
+	}
+	
 
 }
