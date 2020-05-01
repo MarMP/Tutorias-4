@@ -62,25 +62,25 @@ public class ControladorBuscarTutorias {
 
 	@FXML
 	void buscarTutoria(ActionEvent event) {
-		Profesor profesor = lvProfesor.getSelectionModel().getSelectedItem();
+		String dni = lvProfesor.getSelectionModel().getSelectedItem().getDni();
+
 		try {
-			tutoria = new Tutoria(profesor, tfNombreTutoria.getText());
-			controladorMVC.buscar(tutoria);
+			tutoria = new Tutoria(Profesor.getProfesorFicticio(dni), tfNombreTutoria.getText());
+			tutoria = controladorMVC.buscar(tutoria);
 			((Stage) btnAceptar.getScene().getWindow()).close();
 		} catch (Exception e) {
 			Dialogos.mostrarDialogoError("Buscar Tutoría", e.getMessage());
 		}
 	}
-	
+
 	@FXML
-	private void cancelar(ActionEvent event) {
+	void cancelar(ActionEvent event) {
 		((Stage) btnCancelar.getScene().getWindow()).close();
 	}
-	
+
 	@FXML
 	private void limpiar() {
 		tfNombreTutoria.setText("");
 	}
 
-	
 }

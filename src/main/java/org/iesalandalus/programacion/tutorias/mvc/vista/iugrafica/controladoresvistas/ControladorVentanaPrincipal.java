@@ -38,6 +38,11 @@ public class ControladorVentanaPrincipal {
 	@FXML Button btnAnadirTutoria;
 	@FXML Button btnBuscarTutoria;
 	@FXML Button btnBorrarTutoria;
+	@FXML Button btnListarSesiones;
+	@FXML Button btnAnadirSesion;
+	@FXML Button btnBuscarSesion;
+	@FXML Button btnBorrarSesion;
+	
 	
 	private Stage anadirProfesor;
     private ControladorAnadirProfesor cAnadirProfesor;
@@ -376,7 +381,6 @@ public class ControladorVentanaPrincipal {
 			Scene escenaListarTutorias = new Scene(raizListarTutorias);
 			listarTutorias.setTitle("Listar Tutorías");
 			listarTutorias.initModality(Modality.APPLICATION_MODAL); 
-			System.out.println("salgo del metodo");
 			listarTutorias.setScene(escenaListarTutorias);
 		} else {
 			cListarTutorias.inicializa();
