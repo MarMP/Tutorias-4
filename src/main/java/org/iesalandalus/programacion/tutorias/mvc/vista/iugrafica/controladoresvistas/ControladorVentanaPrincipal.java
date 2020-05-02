@@ -2,11 +2,11 @@ package org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.controladores
 
 import java.io.IOException;
 
-import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.tutorias.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
 import org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.utilidades.Dialogos;
 
@@ -64,6 +64,14 @@ public class ControladorVentanaPrincipal {
     private ControladorMostrarTutoria cMostrarTutoria;
     private Stage listarTutorias;
     private ControladorListarTutorias cListarTutorias;
+    private Stage anadirSesion;
+    private ControladorAnadirSesion cAnadirSesion;
+    private Stage listarSesiones;
+    private ControladorListarSesiones cListarSesiones;
+    private Stage mostrarSesion;
+    private ControladorMostrarSesion cMostrarSesion;
+    private Stage buscarSesion;
+    private ControladorBuscarSesiones cBuscarSesion;
     
     
     
@@ -226,7 +234,40 @@ public class ControladorVentanaPrincipal {
 		} catch (Exception e) {
 			Dialogos.mostrarDialogoError("Error", e.getMessage());
 		}
+	}
+	
+	//SESIÓN
+	@FXML
+	private void anadirSesion() throws IOException {
+		crearAnadirSesion();
+		anadirSesion.showAndWait();
+	}
+	@FXML
+	private void listarSesiones() throws IOException {
+		crearListarSesiones();
+		listarSesiones.showAndWait();
+	}
+	
+	@FXML
+	private void buscarSesion() throws IOException {
+		crearBuscarSesion();
+		buscarSesion.showAndWait();
+		Sesion sesion = cBuscarSesion.getSesion();
+		if (sesion != null) {
+			crearMostrarSesion(sesion);
+			mostrarSesion.showAndWait();
+		} else {
+			Dialogos.mostrarDialogoError("Sesión no encontrada", "No existe ninguna sesión con ese nombre de tutoría y fecha.");
+		}
+	}
 
+	@FXML
+	private void borrarSesion() {
+		try {
+			buscarSesion();
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoError("Error", e.getMessage());
+		}
 	}
 
 	private void crearAnadirProfesor() throws IOException {
@@ -272,12 +313,30 @@ public class ControladorVentanaPrincipal {
 			cAnadirTutorias = cargadorAnadirTutorias.getController();
 			cAnadirTutorias.setControladorMVC(controladorMVC);
 			cAnadirTutorias.inicializa();
-			Scene escenaAnadirAula = new Scene(raizAnadirTutorias);
+			Scene escenaAnadirTutoria = new Scene(raizAnadirTutorias);
 			anadirTutorias.setTitle("Añadir Tutoría");
 			anadirTutorias.initModality(Modality.APPLICATION_MODAL); 
-			anadirTutorias.setScene(escenaAnadirAula);
+			anadirTutorias.setScene(escenaAnadirTutoria);
 		} else {
 			cAnadirTutorias.inicializa();
+		}
+	}
+	
+	private void crearAnadirSesion() throws IOException {
+		if (anadirSesion == null) {
+			anadirSesion = new Stage();
+			FXMLLoader cargadorAnadirSesion = new FXMLLoader(
+						getClass().getResource("../vistas/AnadirSesiones.fxml"));
+			VBox raizAnadirSesion = cargadorAnadirSesion.load();
+			cAnadirSesion = cargadorAnadirSesion.getController();
+			cAnadirSesion.setControladorMVC(controladorMVC);
+			cAnadirSesion.inicializa();
+			Scene escenaAnadirSesion = new Scene(raizAnadirSesion);
+			anadirSesion.setTitle("Añadir sesión");
+			anadirSesion.initModality(Modality.APPLICATION_MODAL); 
+			anadirSesion.setScene(escenaAnadirSesion);
+		} else {
+			cAnadirSesion.inicializa();
 		}
 	}
 
@@ -331,6 +390,24 @@ public class ControladorVentanaPrincipal {
 			mostrarTutoria.setScene(escenaMostrarTutoria);
 		} else {
 			cMostrarTutoria.setTutoria(tutoria);
+		}
+	}
+	
+	private void crearMostrarSesion (Sesion sesion) throws IOException {
+		if (mostrarSesion == null) {
+			mostrarSesion  = new Stage();
+			FXMLLoader cargadorMostrarSesion = new FXMLLoader(
+						getClass().getResource("../vistas/MostrarSesion.fxml"));
+			VBox raizMostrarSesion = cargadorMostrarSesion.load();
+			cMostrarSesion = cargadorMostrarSesion.getController();
+			cMostrarSesion.setControladorMVC(controladorMVC);
+			cMostrarSesion.setSesion(sesion);
+			Scene escenaMostrarSesion = new Scene(raizMostrarSesion);
+			mostrarSesion.setTitle("Mostrar Sesión");
+			mostrarSesion.initModality(Modality.APPLICATION_MODAL); 
+			mostrarSesion.setScene(escenaMostrarSesion);
+		} else {
+			cMostrarSesion.setSesion(sesion);
 		}
 	}
 
@@ -387,6 +464,24 @@ public class ControladorVentanaPrincipal {
 		}
 	}
 	
+	private void crearListarSesiones() throws IOException {
+		if (listarSesiones == null) {
+			listarSesiones = new Stage();
+			FXMLLoader cargadorListarSesiones = new FXMLLoader(
+						getClass().getResource("../vistas/ListarSesiones.fxml"));
+			VBox raizListarSesiones = cargadorListarSesiones.load();
+			cListarSesiones = cargadorListarSesiones.getController();
+			cListarSesiones.setControladorMVC(controladorMVC);
+			cListarSesiones.inicializa();
+			Scene escenaListarSesiones = new Scene(raizListarSesiones);
+			listarSesiones.setTitle("Listar Sesiones");
+			listarSesiones.initModality(Modality.APPLICATION_MODAL); 
+			listarSesiones.setScene(escenaListarSesiones);
+		} else {
+			cListarSesiones.inicializa();
+		}
+	}
+	
 	private void crearBuscarTutoria() throws IOException {
 		if (buscarTutoria == null) {
 			buscarTutoria = new Stage();
@@ -404,6 +499,22 @@ public class ControladorVentanaPrincipal {
 			cBuscarTutorias.inicializa();
 		}
 	}
-	
+
+	private void crearBuscarSesion() throws IOException {
+		if (buscarSesion == null) {
+			buscarSesion = new Stage();
+			FXMLLoader cargadorBuscarSesion = new FXMLLoader(getClass().getResource("../vistas/BuscarSesiones.fxml"));
+			VBox raizBuscarSesion = cargadorBuscarSesion.load();
+			cBuscarSesion = cargadorBuscarSesion.getController();
+			cBuscarSesion.setControladorMVC(controladorMVC);
+			cBuscarSesion.inicializa();
+			Scene escenaBuscarSesion = new Scene(raizBuscarSesion);
+			buscarSesion.setTitle("Buscar Sesión");
+			buscarSesion.initModality(Modality.APPLICATION_MODAL);
+			buscarSesion.setScene(escenaBuscarSesion);
+		} else {
+			cBuscarSesion.inicializa();
+		}
+	}
 
 }
