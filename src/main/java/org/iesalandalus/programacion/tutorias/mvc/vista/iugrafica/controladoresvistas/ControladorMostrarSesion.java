@@ -6,7 +6,6 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.tutorias.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
-import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
 import org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.utilidades.Dialogos;
 
 import javafx.fxml.FXML;
@@ -60,11 +59,14 @@ public class ControladorMostrarSesion {
 	void borrar() {
 		Stage propietario = (Stage) btnBorrar.getScene().getWindow();
 		try {
-			controladorMVC.borrar(sesion);
+			if (Dialogos.mostrarDialogoConfirmacion("Confirmar",
+					"¿Estás seguro de que desea eliminar la sesión:  " + sesion + "?", null)) {
+				controladorMVC.borrar(sesion);
+				Dialogos.mostrarDialogoInformacion("Borrar sesión", "Sesión borrada satisfactoriamente", propietario);
+			}
 		} catch (OperationNotSupportedException e) {
 			Dialogos.mostrarDialogoError("Borrar sesión", e.getMessage(), propietario);
 		}
-		Dialogos.mostrarDialogoInformacion("Borrar sesión", "Sesión borrada satisfactoriamente", propietario);
 	}
 
 }

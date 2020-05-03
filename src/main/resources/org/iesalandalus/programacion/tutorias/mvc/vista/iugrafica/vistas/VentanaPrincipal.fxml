@@ -18,7 +18,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca De ..." />
+              <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca De" />
             </items>
           </Menu>
         </menus>
@@ -32,7 +32,7 @@
                <content>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="btnListar" mnemonicParsing="false" onAction="#listarProfesores" prefHeight="50.0" prefWidth="130.0" text="Listar">
+                        <Button fx:id="btnListarProfesor" mnemonicParsing="false" onAction="#listarProfesores" prefHeight="50.0" prefWidth="130.0" text="Listar">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -41,7 +41,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnAnadir" mnemonicParsing="false" onAction="#anadirProfesor" prefHeight="50.0" prefWidth="130.0" text="Añadir">
+                        <Button fx:id="btnAnadirProfesor" mnemonicParsing="false" onAction="#anadirProfesor" prefHeight="50.0" prefWidth="130.0" text="Añadir">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -50,7 +50,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarProfesor" prefHeight="50.0" prefWidth="130.0" text="Buscar">
+                        <Button fx:id="btnBuscarProfesor" mnemonicParsing="false" onAction="#buscarProfesor" prefHeight="50.0" prefWidth="130.0" text="Buscar">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -59,7 +59,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnBorrar" mnemonicParsing="false" onAction="#borrarProfesor" prefHeight="50.0" prefWidth="130.0" text="Borrar">
+                        <Button fx:id="btnBorrarProfesor" mnemonicParsing="false" onAction="#borrarProfesor" prefHeight="50.0" prefWidth="130.0" text="Borrar">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

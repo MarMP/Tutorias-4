@@ -62,14 +62,13 @@ public class ControladorBuscarTutorias {
 
 	@FXML
 	void buscarTutoria(ActionEvent event) {
-		String dni = lvProfesor.getSelectionModel().getSelectedItem().getDni();
-
 		try {
+			String dni = lvProfesor.getSelectionModel().getSelectedItem().getDni();
 			tutoria = new Tutoria(Profesor.getProfesorFicticio(dni), tfNombreTutoria.getText());
 			tutoria = controladorMVC.buscar(tutoria);
 			((Stage) btnAceptar.getScene().getWindow()).close();
 		} catch (Exception e) {
-			Dialogos.mostrarDialogoError("Buscar Tutoría", e.getMessage());
+			Dialogos.mostrarDialogoError("Buscar Tutoría", "UPS! no ha introducido ningún campo");
 		}
 	}
 

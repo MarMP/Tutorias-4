@@ -25,6 +25,13 @@ public class ControladorAnadirAlumno {
 	public void setControladorMVC(IControlador controladorMVC) {
 		this.controladorMVC = controladorMVC;
 	}
+	
+	public void inicializa() {
+		tfNombre.setText("");
+		compruebaCampoTexto(ER_NOMBRE, tfNombre);
+		tfCorreo.setText("");
+		compruebaCampoTexto(ER_CORREO, tfCorreo);
+	}
 
 	@FXML
 	private void initialize() {
@@ -54,13 +61,6 @@ public class ControladorAnadirAlumno {
 	private void limpiar() {
 		tfNombre.setText("");
 		tfCorreo.setText("");
-	}
-
-	public void inicializa() {
-		tfNombre.setText("");
-		compruebaCampoTexto(ER_NOMBRE, tfNombre);
-		tfCorreo.setText("");
-		compruebaCampoTexto(ER_CORREO, tfCorreo);
 	}
 
 	private void compruebaCampoTexto(String er, TextField campoTexto) {

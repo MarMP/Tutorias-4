@@ -9,7 +9,7 @@
 
 <VBox alignment="CENTER" prefHeight="441.0" prefWidth="753.0" spacing="20.0" styleClass="vbox" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.controladoresvistas.ControladorListarSesiones">
    <children>
-      <Label style="-fx-font-size: 25;" text="Sesiones" />
+      <Label style="-fx-font-size: 25;" text="Sesiones" textFill="#c6a7a7" />
       <TableView fx:id="tvSesiones" prefHeight="359.0" prefWidth="611.0">
         <columns>
           <TableColumn fx:id="tcTutoria" prefWidth="97.0" text="Tutoria" />

@@ -67,11 +67,14 @@ public class ControladorMostrarCita {
 	void borrar() {
 		Stage propietario = (Stage) btnBorrar.getScene().getWindow();
 		try {
-			controladorMVC.borrar(cita);
+			if (Dialogos.mostrarDialogoConfirmacion("Confirmar",
+					"¿Estás seguro de que desea eliminar la cita:  " + cita + "?", null)) {
+				controladorMVC.borrar(cita);
+				Dialogos.mostrarDialogoInformacion("Borrar cita", "Cita borrada satisfactoriamente", propietario);
+			}
 		} catch (OperationNotSupportedException e) {
 			Dialogos.mostrarDialogoError("Borrar cita", e.getMessage(), propietario);
 		}
-		Dialogos.mostrarDialogoInformacion("Borrar cita", "Cita borrada satisfactoriamente", propietario);
 	}
 
 }

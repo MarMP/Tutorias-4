@@ -31,6 +31,9 @@ public class ControladorAnadirCita {
 	
 	private IControlador controladorMVC;
 	
+	private ObservableList<Sesion> sesiones = FXCollections.observableArrayList();
+	private ObservableList<Alumno> alumnos = FXCollections.observableArrayList();
+	
 	@FXML private TableView<Sesion> tvSesiones;
 	@FXML private TableColumn<Sesion, String> tcProfesor;
 	@FXML private TableColumn<Sesion, String> tcTutoria;
@@ -43,9 +46,6 @@ public class ControladorAnadirCita {
 	@FXML private Button btnBorrar;
 	@FXML private Button btnAceptar;
 	@FXML private Button btnCancelar;
-	 
-	private ObservableList<Sesion> sesiones = FXCollections.observableArrayList();
-	private ObservableList<Alumno> alumnos = FXCollections.observableArrayList();
 
 	private class CeldaAlumno extends ListCell<Alumno> {
 		@Override
@@ -63,28 +63,29 @@ public class ControladorAnadirCita {
 		this.controladorMVC = controladorMVC;
 	}
 
-	public void inicializa() {
-		sesiones.setAll(FXCollections.observableArrayList(controladorMVC.getSesiones()));
-		alumnos.setAll(FXCollections.observableArrayList(controladorMVC.getAlumnos()));
-		tfHoraCita.setText("");
-		compruebaCampoTexto("", tfHoraCita);
-	}
-
 	@FXML
 	private void initialize() {
-		tcProfesor.setCellValueFactory(cita -> new SimpleStringProperty(cita.getValue().getTutoria().getProfesor().getNombre()));
+		tcProfesor.setCellValueFactory(
+				cita -> new SimpleStringProperty(cita.getValue().getTutoria().getProfesor().getNombre()));
 		tcTutoria.setCellValueFactory(cita -> new SimpleStringProperty(cita.getValue().getTutoria().getNombre()));
 		tcFecha.setCellValueFactory(cita -> new SimpleStringProperty(FORMATO_FECHA.format(cita.getValue().getFecha())));
-		tcInicio.setCellValueFactory(cita -> new SimpleStringProperty(FORMATO_HORA.format(cita.getValue().getHoraInicio())));
+		tcInicio.setCellValueFactory(
+				cita -> new SimpleStringProperty(FORMATO_HORA.format(cita.getValue().getHoraInicio())));
 		tcFin.setCellValueFactory(cita -> new SimpleStringProperty(FORMATO_HORA.format(cita.getValue().getHoraFin())));
-		tcDuracion.setCellValueFactory(cita -> new SimpleIntegerProperty(cita.getValue().getMinutosDuracion()).asObject());
+		tcDuracion.setCellValueFactory(
+				cita -> new SimpleIntegerProperty(cita.getValue().getMinutosDuracion()).asObject());
 		tfHoraCita.setDisable(false);
 		tvSesiones.setItems(sesiones);
 		lvAlumno.setItems(alumnos);
 		lvAlumno.setCellFactory(l -> new CeldaAlumno());
 	}
 
-	
+	public void inicializa() {
+		sesiones.setAll(FXCollections.observableArrayList(controladorMVC.getSesiones()));
+		alumnos.setAll(FXCollections.observableArrayList(controladorMVC.getAlumnos()));
+		tfHoraCita.setText("");
+		compruebaCampoTexto("", tfHoraCita);
+	}
 
 	@FXML
 	void anadirCita(ActionEvent event) {

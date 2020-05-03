@@ -48,7 +48,7 @@ public class ControladorListarTutorias {
 				if(newValue == null || newValue.isEmpty()) {			
 					return true;
 				} 		
-				if (tutoria.getProfesor().getNombre().toLowerCase().contains(newValue)) {
+				if (tutoria.getProfesor().getDni().contains(newValue)) {
 					return true;
 				} else {
 					return false;

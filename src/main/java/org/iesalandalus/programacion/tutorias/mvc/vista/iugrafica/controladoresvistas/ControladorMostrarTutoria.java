@@ -45,11 +45,14 @@ public class ControladorMostrarTutoria {
 	private void borrar() {
 		Stage propietario = (Stage) btnBorrar.getScene().getWindow();
 		try {
-			controladorMVC.borrar(tutoria);
+			if (Dialogos.mostrarDialogoConfirmacion("Confirmar",
+					"¿Estás seguro de que desea eliminar la tutoría:  " + tutoria + "?", null)) {
+				controladorMVC.borrar(tutoria);
+				Dialogos.mostrarDialogoInformacion("Borrar tutoría", "Tutoría borrada satisfactoriamente", propietario);
+			}
 		} catch (OperationNotSupportedException e) {
 			Dialogos.mostrarDialogoError("Borrar tutoría", e.getMessage(), propietario);
 		}
-		Dialogos.mostrarDialogoInformacion("Borrar tutoría", "Tutoría borrada satisfactoriamente", propietario);
 	}
 
 }

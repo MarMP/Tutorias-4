@@ -22,15 +22,16 @@ import javafx.stage.Stage;
 public class ControladorVentanaPrincipal {
 
 	private IControlador controladorMVC;
-
+	
 	public void setControladorMVC(IControlador controladorMVC) {
 		this.controladorMVC = controladorMVC;
 	}
+	
 	//Variables de fxml ventana principal
-	@FXML Button btnAnadir;
-	@FXML Button btnBuscar;
-	@FXML Button btnBorrar;
-	@FXML Button btnListar;
+	@FXML Button btnAnadirProfesor;
+	@FXML Button btnBuscarProfesor;
+	@FXML Button btnBorrarProfesor;
+	@FXML Button btnListarProfesor;
 	@FXML Button btnAnadirAlumno;
 	@FXML Button btnBuscarAlumno;
 	@FXML Button btnBorrarAlumno;
@@ -210,15 +211,15 @@ public class ControladorVentanaPrincipal {
 		crearListarAlumnos();
 		listarAlumnos.showAndWait();
 	}
-	
-	//TUTORÍAS
-	
+
+	// TUTORÍAS
+
 	@FXML
 	private void anadirTutoria() throws IOException {
 		crearAnadirTutorias();
 		anadirTutorias.showAndWait();
 	}
-	
+
 	@FXML
 	private void buscarTutoria() throws IOException {
 		crearBuscarTutoria();
@@ -231,13 +232,13 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Tutoria no encontrada", "No existe ninguna tutoria");
 		}
 	}
-	
+
 	@FXML
 	private void listarTutorias() throws IOException {
 		crearListarTutorias();
 		listarTutorias.showAndWait();
 	}
-	
+
 	@FXML
 	private void borrarTutoria() {
 		try {
@@ -246,19 +247,20 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Error", e.getMessage());
 		}
 	}
-	
-	//SESIÓN
+
+	// SESIÓN
 	@FXML
 	private void anadirSesion() throws IOException {
 		crearAnadirSesion();
 		anadirSesion.showAndWait();
 	}
+
 	@FXML
 	private void listarSesiones() throws IOException {
 		crearListarSesiones();
 		listarSesiones.showAndWait();
 	}
-	
+
 	@FXML
 	private void buscarSesion() throws IOException {
 		crearBuscarSesion();
@@ -268,7 +270,8 @@ public class ControladorVentanaPrincipal {
 			crearMostrarSesion(sesion);
 			mostrarSesion.showAndWait();
 		} else {
-			Dialogos.mostrarDialogoError("Sesión no encontrada", "No existe ninguna sesión con ese nombre de tutoría y fecha.");
+			Dialogos.mostrarDialogoError("Sesión no encontrada",
+					"No existe ninguna sesión con ese nombre de tutoría y fecha.");
 		}
 	}
 
@@ -280,20 +283,20 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Error", e.getMessage());
 		}
 	}
-	
-	//CITAS
+
+	// CITAS
 	@FXML
 	private void anadirCita() throws IOException {
 		crearAnadirCita();
 		anadirCita.showAndWait();
 	}
-	
+
 	@FXML
 	private void listarCitas() throws IOException {
 		crearListarCitas();
 		listarCitas.showAndWait();
 	}
-	
+
 	@FXML
 	private void buscarCita() throws IOException {
 		crearBuscarCita();
@@ -306,7 +309,7 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Cita no encontrada", "No existe ninguna cita para esa hora.");
 		}
 	}
-	
+
 	@FXML
 	private void borrarCita() {
 		try {
@@ -315,8 +318,7 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Error", e.getMessage());
 		}
 	}
-	
-	
+
 	private void crearAnadirProfesor() throws IOException {
 		if (anadirProfesor == null) {
 			anadirProfesor = new Stage();
@@ -350,55 +352,52 @@ public class ControladorVentanaPrincipal {
 			cAnadirAlumno.inicializa();
 		}
 	}
-	
+
 	private void crearAnadirTutorias() throws IOException {
 		if (anadirTutorias == null) {
 			anadirTutorias = new Stage();
-			FXMLLoader cargadorAnadirTutorias = new FXMLLoader(
-						getClass().getResource("../vistas/AnadirTutorias.fxml"));
+			FXMLLoader cargadorAnadirTutorias = new FXMLLoader(getClass().getResource("../vistas/AnadirTutorias.fxml"));
 			VBox raizAnadirTutorias = cargadorAnadirTutorias.load();
 			cAnadirTutorias = cargadorAnadirTutorias.getController();
 			cAnadirTutorias.setControladorMVC(controladorMVC);
 			cAnadirTutorias.inicializa();
 			Scene escenaAnadirTutoria = new Scene(raizAnadirTutorias);
 			anadirTutorias.setTitle("Añadir Tutoría");
-			anadirTutorias.initModality(Modality.APPLICATION_MODAL); 
+			anadirTutorias.initModality(Modality.APPLICATION_MODAL);
 			anadirTutorias.setScene(escenaAnadirTutoria);
 		} else {
 			cAnadirTutorias.inicializa();
 		}
 	}
-	
+
 	private void crearAnadirSesion() throws IOException {
 		if (anadirSesion == null) {
 			anadirSesion = new Stage();
-			FXMLLoader cargadorAnadirSesion = new FXMLLoader(
-						getClass().getResource("../vistas/AnadirSesiones.fxml"));
+			FXMLLoader cargadorAnadirSesion = new FXMLLoader(getClass().getResource("../vistas/AnadirSesiones.fxml"));
 			VBox raizAnadirSesion = cargadorAnadirSesion.load();
 			cAnadirSesion = cargadorAnadirSesion.getController();
 			cAnadirSesion.setControladorMVC(controladorMVC);
 			cAnadirSesion.inicializa();
 			Scene escenaAnadirSesion = new Scene(raizAnadirSesion);
 			anadirSesion.setTitle("Añadir sesión");
-			anadirSesion.initModality(Modality.APPLICATION_MODAL); 
+			anadirSesion.initModality(Modality.APPLICATION_MODAL);
 			anadirSesion.setScene(escenaAnadirSesion);
 		} else {
 			cAnadirSesion.inicializa();
 		}
 	}
-	
+
 	private void crearAnadirCita() throws IOException {
 		if (anadirCita == null) {
 			anadirCita = new Stage();
-			FXMLLoader cargadorAnadirCita = new FXMLLoader(
-						getClass().getResource("../vistas/AnadirCitas.fxml"));
+			FXMLLoader cargadorAnadirCita = new FXMLLoader(getClass().getResource("../vistas/AnadirCitas.fxml"));
 			VBox raizAnadirCita = cargadorAnadirCita.load();
 			cAnadirCita = cargadorAnadirCita.getController();
 			cAnadirCita.setControladorMVC(controladorMVC);
 			cAnadirCita.inicializa();
 			Scene escenaAnadirCita = new Scene(raizAnadirCita);
 			anadirCita.setTitle("Añadir cita");
-			anadirCita.initModality(Modality.APPLICATION_MODAL); 
+			anadirCita.initModality(Modality.APPLICATION_MODAL);
 			anadirCita.setScene(escenaAnadirCita);
 		} else {
 			cAnadirCita.inicializa();
@@ -439,54 +438,53 @@ public class ControladorVentanaPrincipal {
 			cMostrarAlumno.setAlumno(alumno);
 		}
 	}
-	
+
 	private void crearMostrarTutoria(Tutoria tutoria) throws IOException {
 		if (mostrarTutoria == null) {
 			mostrarTutoria = new Stage();
 			FXMLLoader cargadorMostrarTutoria = new FXMLLoader(
-						getClass().getResource("../vistas/MostrarTutorias.fxml"));
+					getClass().getResource("../vistas/MostrarTutorias.fxml"));
 			VBox raizMostrarTutoria = cargadorMostrarTutoria.load();
 			cMostrarTutoria = cargadorMostrarTutoria.getController();
 			cMostrarTutoria.setControladorMVC(controladorMVC);
 			cMostrarTutoria.setTutoria(tutoria);
 			Scene escenaMostrarTutoria = new Scene(raizMostrarTutoria);
 			mostrarTutoria.setTitle("Mostrar Reserva");
-			mostrarTutoria.initModality(Modality.APPLICATION_MODAL); 
+			mostrarTutoria.initModality(Modality.APPLICATION_MODAL);
 			mostrarTutoria.setScene(escenaMostrarTutoria);
 		} else {
 			cMostrarTutoria.setTutoria(tutoria);
 		}
 	}
-	
-	private void crearMostrarSesion (Sesion sesion) throws IOException {
+
+	private void crearMostrarSesion(Sesion sesion) throws IOException {
 		if (mostrarSesion == null) {
-			mostrarSesion  = new Stage();
-			FXMLLoader cargadorMostrarSesion = new FXMLLoader(
-						getClass().getResource("../vistas/MostrarSesion.fxml"));
+			mostrarSesion = new Stage();
+			FXMLLoader cargadorMostrarSesion = new FXMLLoader(getClass().getResource("../vistas/MostrarSesion.fxml"));
 			VBox raizMostrarSesion = cargadorMostrarSesion.load();
 			cMostrarSesion = cargadorMostrarSesion.getController();
 			cMostrarSesion.setControladorMVC(controladorMVC);
 			cMostrarSesion.setSesion(sesion);
 			Scene escenaMostrarSesion = new Scene(raizMostrarSesion);
 			mostrarSesion.setTitle("Mostrar Sesión");
-			mostrarSesion.initModality(Modality.APPLICATION_MODAL); 
+			mostrarSesion.initModality(Modality.APPLICATION_MODAL);
 			mostrarSesion.setScene(escenaMostrarSesion);
 		} else {
 			cMostrarSesion.setSesion(sesion);
 		}
 	}
-	private void crearMostrarCita (Cita cita) throws IOException {
+
+	private void crearMostrarCita(Cita cita) throws IOException {
 		if (mostrarCita == null) {
-			mostrarCita  = new Stage();
-			FXMLLoader cargadorMostrarCita = new FXMLLoader(
-						getClass().getResource("../vistas/MostrarCita.fxml"));
+			mostrarCita = new Stage();
+			FXMLLoader cargadorMostrarCita = new FXMLLoader(getClass().getResource("../vistas/MostrarCita.fxml"));
 			VBox raizMostrarCita = cargadorMostrarCita.load();
 			cMostrarCita = cargadorMostrarCita.getController();
 			cMostrarCita.setControladorMVC(controladorMVC);
 			cMostrarCita.setCita(cita);
 			Scene escenaMostrarCita = new Scene(raizMostrarCita);
 			mostrarCita.setTitle("Mostrar cita");
-			mostrarCita.initModality(Modality.APPLICATION_MODAL); 
+			mostrarCita.initModality(Modality.APPLICATION_MODAL);
 			mostrarCita.setScene(escenaMostrarCita);
 		} else {
 			cMostrarCita.setCita(cita);
@@ -527,73 +525,69 @@ public class ControladorVentanaPrincipal {
 			cListarAlumnos.inicializa();
 		}
 	}
-	
+
 	private void crearListarTutorias() throws IOException {
 		if (listarTutorias == null) {
 			listarTutorias = new Stage();
-			FXMLLoader cargadorListarTutorias = new FXMLLoader(
-						getClass().getResource("../vistas/ListarTutorias.fxml"));
+			FXMLLoader cargadorListarTutorias = new FXMLLoader(getClass().getResource("../vistas/ListarTutorias.fxml"));
 			VBox raizListarTutorias = cargadorListarTutorias.load();
 			cListarTutorias = cargadorListarTutorias.getController();
 			cListarTutorias.setControladorMVC(controladorMVC);
 			cListarTutorias.inicializa();
 			Scene escenaListarTutorias = new Scene(raizListarTutorias);
 			listarTutorias.setTitle("Listar Tutorías");
-			listarTutorias.initModality(Modality.APPLICATION_MODAL); 
+			listarTutorias.initModality(Modality.APPLICATION_MODAL);
 			listarTutorias.setScene(escenaListarTutorias);
 		} else {
 			cListarTutorias.inicializa();
 		}
 	}
-	
+
 	private void crearListarSesiones() throws IOException {
 		if (listarSesiones == null) {
 			listarSesiones = new Stage();
-			FXMLLoader cargadorListarSesiones = new FXMLLoader(
-						getClass().getResource("../vistas/ListarSesiones.fxml"));
+			FXMLLoader cargadorListarSesiones = new FXMLLoader(getClass().getResource("../vistas/ListarSesiones.fxml"));
 			VBox raizListarSesiones = cargadorListarSesiones.load();
 			cListarSesiones = cargadorListarSesiones.getController();
 			cListarSesiones.setControladorMVC(controladorMVC);
 			cListarSesiones.inicializa();
 			Scene escenaListarSesiones = new Scene(raizListarSesiones);
 			listarSesiones.setTitle("Listar Sesiones");
-			listarSesiones.initModality(Modality.APPLICATION_MODAL); 
+			listarSesiones.initModality(Modality.APPLICATION_MODAL);
 			listarSesiones.setScene(escenaListarSesiones);
 		} else {
 			cListarSesiones.inicializa();
 		}
 	}
-	
+
 	private void crearListarCitas() throws IOException {
 		if (listarCitas == null) {
 			listarCitas = new Stage();
-			FXMLLoader cargadorListarCitas = new FXMLLoader(
-						getClass().getResource("../vistas/ListarCitas.fxml"));
+			FXMLLoader cargadorListarCitas = new FXMLLoader(getClass().getResource("../vistas/ListarCitas.fxml"));
 			VBox raizListarCitas = cargadorListarCitas.load();
 			cListarCitas = cargadorListarCitas.getController();
 			cListarCitas.setControladorMVC(controladorMVC);
 			cListarCitas.inicializa();
 			Scene escenaListarCitas = new Scene(raizListarCitas);
 			listarCitas.setTitle("Listar Citas");
-			listarCitas.initModality(Modality.APPLICATION_MODAL); 
+			listarCitas.initModality(Modality.APPLICATION_MODAL);
 			listarCitas.setScene(escenaListarCitas);
 		} else {
 			cListarCitas.inicializa();
 		}
 	}
-	
+
 	private void crearBuscarTutoria() throws IOException {
 		if (buscarTutoria == null) {
 			buscarTutoria = new Stage();
-			FXMLLoader cargadorBuscarTutoria = new FXMLLoader(
-						getClass().getResource("../vistas/BuscarTutorias.fxml"));
+			FXMLLoader cargadorBuscarTutoria = new FXMLLoader(getClass().getResource("../vistas/BuscarTutorias.fxml"));
 			VBox raizBuscarTutoria = cargadorBuscarTutoria.load();
 			cBuscarTutorias = cargadorBuscarTutoria.getController();
 			cBuscarTutorias.setControladorMVC(controladorMVC);
 			cBuscarTutorias.inicializa();
 			Scene escenaBuscarProfesor = new Scene(raizBuscarTutoria);
 			buscarTutoria.setTitle("Buscar Tutoria");
-			buscarTutoria.initModality(Modality.APPLICATION_MODAL); 
+			buscarTutoria.initModality(Modality.APPLICATION_MODAL);
 			buscarTutoria.setScene(escenaBuscarProfesor);
 		} else {
 			cBuscarTutorias.inicializa();
@@ -616,7 +610,7 @@ public class ControladorVentanaPrincipal {
 			cBuscarSesion.inicializa();
 		}
 	}
-	
+
 	private void crearBuscarCita() throws IOException {
 		if (buscarCita == null) {
 			buscarCita = new Stage();
