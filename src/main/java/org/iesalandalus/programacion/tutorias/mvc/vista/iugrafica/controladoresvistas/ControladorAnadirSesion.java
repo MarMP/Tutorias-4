@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.tutorias.mvc.vista.iugrafica.controladores
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.iesalandalus.programacion.tutorias.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
@@ -76,15 +77,14 @@ public class ControladorAnadirSesion {
 		LocalDate fechaSesion = dpDia.getValue();
 		Sesion sesion = null;
 		try {
-			sesion = new Sesion(tutoria, fechaSesion, LocalTime.parse(tfInicio.getText()),
-					LocalTime.parse(tfFin.getText()), Integer.parseInt(tfDuracion.getText()));
+			sesion = new Sesion(tutoria, fechaSesion, LocalTime.parse(tfInicio.getText(),DateTimeFormatter.ofPattern("HH:mm")),
+					LocalTime.parse(tfFin.getText(),DateTimeFormatter.ofPattern("HH:mm")), Integer.parseInt(tfDuracion.getText()));
 			controladorMVC.insertar(sesion);
 			Stage propietario = ((Stage) btnAceptar.getScene().getWindow());
 			Dialogos.mostrarDialogoInformacion("Añadir Sesión", "Sesión insertada correctamente.", propietario);
 		} catch (Exception e) {
 			Dialogos.mostrarDialogoError("Añadir sesión", e.getMessage());
 		}
-
 	}
 
 	@FXML

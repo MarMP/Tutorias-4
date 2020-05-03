@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.iesalandalus.programacion.tutorias.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Cita;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Sesion;
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Tutoria;
@@ -42,6 +43,10 @@ public class ControladorVentanaPrincipal {
 	@FXML Button btnAnadirSesion;
 	@FXML Button btnBuscarSesion;
 	@FXML Button btnBorrarSesion;
+	@FXML Button btnAnadirCita;
+	@FXML Button btnListarCitas;
+	@FXML Button btnBuscarCita;
+	@FXML Button btnBorrarCita;
 	
 	
 	private Stage anadirProfesor;
@@ -72,8 +77,14 @@ public class ControladorVentanaPrincipal {
     private ControladorMostrarSesion cMostrarSesion;
     private Stage buscarSesion;
     private ControladorBuscarSesiones cBuscarSesion;
-    
-    
+    private Stage anadirCita;
+    private ControladorAnadirCita cAnadirCita;
+    private Stage listarCitas;
+    private ControladorListarCitas cListarCitas;
+    private Stage mostrarCita;
+    private ControladorMostrarCita cMostrarCita;
+    private Stage buscarCita;
+    private ControladorBuscarCitas cBuscarCita;
     
 	@FXML
 	void salir() {
@@ -269,7 +280,43 @@ public class ControladorVentanaPrincipal {
 			Dialogos.mostrarDialogoError("Error", e.getMessage());
 		}
 	}
-
+	
+	//CITAS
+	@FXML
+	private void anadirCita() throws IOException {
+		crearAnadirCita();
+		anadirCita.showAndWait();
+	}
+	
+	@FXML
+	private void listarCitas() throws IOException {
+		crearListarCitas();
+		listarCitas.showAndWait();
+	}
+	
+	@FXML
+	private void buscarCita() throws IOException {
+		crearBuscarCita();
+		buscarCita.showAndWait();
+		Cita cita = cBuscarCita.getCitas();
+		if (cita != null) {
+			crearMostrarCita(cita);
+			mostrarCita.showAndWait();
+		} else {
+			Dialogos.mostrarDialogoError("Cita no encontrada", "No existe ninguna cita para esa hora.");
+		}
+	}
+	
+	@FXML
+	private void borrarCita() {
+		try {
+			buscarCita();
+		} catch (Exception e) {
+			Dialogos.mostrarDialogoError("Error", e.getMessage());
+		}
+	}
+	
+	
 	private void crearAnadirProfesor() throws IOException {
 		if (anadirProfesor == null) {
 			anadirProfesor = new Stage();
@@ -337,6 +384,24 @@ public class ControladorVentanaPrincipal {
 			anadirSesion.setScene(escenaAnadirSesion);
 		} else {
 			cAnadirSesion.inicializa();
+		}
+	}
+	
+	private void crearAnadirCita() throws IOException {
+		if (anadirCita == null) {
+			anadirCita = new Stage();
+			FXMLLoader cargadorAnadirCita = new FXMLLoader(
+						getClass().getResource("../vistas/AnadirCitas.fxml"));
+			VBox raizAnadirCita = cargadorAnadirCita.load();
+			cAnadirCita = cargadorAnadirCita.getController();
+			cAnadirCita.setControladorMVC(controladorMVC);
+			cAnadirCita.inicializa();
+			Scene escenaAnadirCita = new Scene(raizAnadirCita);
+			anadirCita.setTitle("Añadir cita");
+			anadirCita.initModality(Modality.APPLICATION_MODAL); 
+			anadirCita.setScene(escenaAnadirCita);
+		} else {
+			cAnadirCita.inicializa();
 		}
 	}
 
@@ -408,6 +473,23 @@ public class ControladorVentanaPrincipal {
 			mostrarSesion.setScene(escenaMostrarSesion);
 		} else {
 			cMostrarSesion.setSesion(sesion);
+		}
+	}
+	private void crearMostrarCita (Cita cita) throws IOException {
+		if (mostrarCita == null) {
+			mostrarCita  = new Stage();
+			FXMLLoader cargadorMostrarCita = new FXMLLoader(
+						getClass().getResource("../vistas/MostrarCita.fxml"));
+			VBox raizMostrarCita = cargadorMostrarCita.load();
+			cMostrarCita = cargadorMostrarCita.getController();
+			cMostrarCita.setControladorMVC(controladorMVC);
+			cMostrarCita.setCita(cita);
+			Scene escenaMostrarCita = new Scene(raizMostrarCita);
+			mostrarCita.setTitle("Mostrar cita");
+			mostrarCita.initModality(Modality.APPLICATION_MODAL); 
+			mostrarCita.setScene(escenaMostrarCita);
+		} else {
+			cMostrarCita.setCita(cita);
 		}
 	}
 
@@ -482,6 +564,24 @@ public class ControladorVentanaPrincipal {
 		}
 	}
 	
+	private void crearListarCitas() throws IOException {
+		if (listarCitas == null) {
+			listarCitas = new Stage();
+			FXMLLoader cargadorListarCitas = new FXMLLoader(
+						getClass().getResource("../vistas/ListarCitas.fxml"));
+			VBox raizListarCitas = cargadorListarCitas.load();
+			cListarCitas = cargadorListarCitas.getController();
+			cListarCitas.setControladorMVC(controladorMVC);
+			cListarCitas.inicializa();
+			Scene escenaListarCitas = new Scene(raizListarCitas);
+			listarCitas.setTitle("Listar Citas");
+			listarCitas.initModality(Modality.APPLICATION_MODAL); 
+			listarCitas.setScene(escenaListarCitas);
+		} else {
+			cListarCitas.inicializa();
+		}
+	}
+	
 	private void crearBuscarTutoria() throws IOException {
 		if (buscarTutoria == null) {
 			buscarTutoria = new Stage();
@@ -514,6 +614,23 @@ public class ControladorVentanaPrincipal {
 			buscarSesion.setScene(escenaBuscarSesion);
 		} else {
 			cBuscarSesion.inicializa();
+		}
+	}
+	
+	private void crearBuscarCita() throws IOException {
+		if (buscarCita == null) {
+			buscarCita = new Stage();
+			FXMLLoader cargadorBuscarCita = new FXMLLoader(getClass().getResource("../vistas/BuscarCitas.fxml"));
+			VBox raizBuscarCita = cargadorBuscarCita.load();
+			cBuscarCita = cargadorBuscarCita.getController();
+			cBuscarCita.setControladorMVC(controladorMVC);
+			cBuscarCita.inicializa();
+			Scene escenaBuscarCita = new Scene(raizBuscarCita);
+			buscarCita.setTitle("Buscar cita");
+			buscarCita.initModality(Modality.APPLICATION_MODAL);
+			buscarCita.setScene(escenaBuscarCita);
+		} else {
+			cBuscarCita.inicializa();
 		}
 	}
 

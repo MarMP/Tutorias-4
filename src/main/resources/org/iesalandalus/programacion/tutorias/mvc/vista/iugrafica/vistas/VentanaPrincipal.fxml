@@ -234,7 +234,7 @@
                <content>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="btnListarCitas" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" text="Listar">
+                        <Button fx:id="btnListarCitas" mnemonicParsing="false" onAction="#listarCitas" prefHeight="50.0" prefWidth="130.0" text="Listar">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -252,7 +252,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnBuscarCita" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" text="Buscar">
+                        <Button fx:id="btnBuscarCita" mnemonicParsing="false" onAction="#buscarCita" prefHeight="50.0" prefWidth="130.0" text="Buscar">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -261,7 +261,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnBorrarCita" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" text="Borrar">
+                        <Button fx:id="btnBorrarCita" mnemonicParsing="false" onAction="#borrarCita" prefHeight="50.0" prefWidth="130.0" text="Borrar">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
